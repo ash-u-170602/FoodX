@@ -46,7 +46,8 @@
                 android:id="@+id/tv_would_you_like_to_eat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_minus15sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:fontFamily="@font/myfont"
                 android:text="What would you like to eat"
                 android:textColor="@color/black"
@@ -58,7 +59,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/random_meal_card"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_200sdp"
+                android:layout_height="@dimen/_160sdp"
                 android:layout_marginStart="@dimen/_25sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_25sdp"
@@ -92,7 +93,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvTrendingMeals"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_120sdp"
+                android:layout_height="@dimen/_90sdp"
                 android:layout_marginStart="@dimen/_25sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +109,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_17ssp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/rvTrendingMeals"
+                app:layout_constraintStart_toStartOf="@+id/tv_trending_item"
                 app:layout_constraintTop_toBottomOf="@+id/rvTrendingMeals" />
 
             <androidx.cardview.widget.CardView
