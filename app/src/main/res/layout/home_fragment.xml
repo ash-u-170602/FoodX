@@ -37,7 +37,7 @@
 
                 <ImageView
                     android:layout_width="@dimen/_35sdp"
-                    android:layout_height="match_parent"
+                    android:layout_height="@dimen/_38sdp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/search" />
             </LinearLayout>
