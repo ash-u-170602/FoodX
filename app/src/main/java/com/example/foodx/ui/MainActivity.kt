@@ -13,10 +13,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val bottomNavigationView = binding.bottomNav
-        val navController =
-            supportFragmentManager.findFragmentById(R.id.FoodNavHost) as NavHostFragment
+        val bottomNav = binding.bottomNav
 
-        bottomNavigationView.setupWithNavController(navController.navController)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.FoodNavHost) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        bottomNav.setupWithNavController(navController)
+
     }
 }
