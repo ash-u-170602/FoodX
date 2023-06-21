@@ -6,8 +6,8 @@
     <item android:title="Favourites"
         android:id="@+id/favouritesFragment"
         android:icon="@drawable/favourites"/>
-    <item android:title="Categories"
+    <item android:title="Cuisines"
         android:id="@+id/categoriesFragment"
-        android:icon="@drawable/categories"/>
+        android:icon="@drawable/area"/>
 
 </menu>
