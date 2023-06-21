@@ -42,6 +42,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
 
+        viewModel.getRandomMeal()
+
         trendingMealAdapter = TrendingMealAdapter()
 
         binding.rvTrendingMeals.apply {
@@ -109,6 +111,9 @@ class HomeFragment : Fragment() {
 
         trendingMealAdapter.onItemClick = { meal ->
             val intent = Intent(activity, MealActivity::class.java)
+            intent.putExtra(MEAL_NAME, meal.strMeal)
+            intent.putExtra(MEAL_THUMB, meal.strMealThumb)
+            intent.putExtra(Meal_ID, meal.idMeal)
             startActivity(intent)
         }
 

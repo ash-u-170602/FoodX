@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.foodx.FoodApplication
 import com.example.foodx.models.CategoriesResponse
 import com.example.foodx.models.CategoryMeals
+import com.example.foodx.models.Meal
 import com.example.foodx.models.MealResponse
 import com.example.foodx.repository.FoodRepository
 import com.example.foodx.util.Resource
@@ -25,10 +26,15 @@ class HomeViewModel(
 
     val randomMealLiveData: MutableLiveData<Resource<MealResponse>> = MutableLiveData()
     var trendingMealLiveData: MutableLiveData<Resource<List<CategoryMeals>>> = MutableLiveData()
+    val mealDetailLiveData: MutableLiveData<Resource<Meal>> = MutableLiveData()
 
     init {
         getRandomMeal()
         getTrendingMeal("Seafood")
+    }
+
+    fun getMealDetails(id: String) = viewModelScope.launch {
+        safeMealDetailsCall(id)
     }
 
     fun getRandomMeal() = viewModelScope.launch {
@@ -37,6 +43,23 @@ class HomeViewModel(
 
     fun getTrendingMeal(categoryName: String) = viewModelScope.launch {
         safeTrendingMealCall(categoryName)
+    }
+
+    private suspend fun safeMealDetailsCall(id: String) {
+        mealDetailLiveData.postValue(Resource.Loading())
+        try {
+            if (hasInternetConnection()) {
+                val response = foodRepository.getMealDetails(id)
+                mealDetailLiveData.postValue(handleMealDetailResponse(response))
+            } else {
+                mealDetailLiveData.postValue(Resource.Error("No Internet Connection"))
+            }
+        } catch (t: Throwable) {
+            when (t) {
+                is IOException -> mealDetailLiveData.postValue(Resource.Error("Network Failure"))
+                else -> mealDetailLiveData.postValue(Resource.Error("Conversion Error"))
+            }
+        }
     }
 
     private suspend fun safeTrendingMealCall(categoryName: String) {
@@ -88,6 +111,15 @@ class HomeViewModel(
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return Resource.Success(resultResponse)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    private fun handleMealDetailResponse(response: Response<MealResponse>): Resource<Meal> {
+        if (response.isSuccessful) {
+            response.body()?.let { resultResponse ->
+                return Resource.Success(resultResponse.meals[0])
             }
         }
         return Resource.Error(response.message())
