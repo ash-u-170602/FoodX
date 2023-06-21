@@ -58,7 +58,7 @@ class FoodViewModel(
         return Resource.Error(response.message())
     }
 
-    fun hasInternetConnection(): Boolean {
+    private fun hasInternetConnection(): Boolean {
         val connectivityManager = getApplication<FoodApplication>().getSystemService(
             Context.CONNECTIVITY_SERVICE
         ) as ConnectivityManager

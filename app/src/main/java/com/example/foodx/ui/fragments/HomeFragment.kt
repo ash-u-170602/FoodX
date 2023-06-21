@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.foodx.R
 import com.example.foodx.databinding.HomeFragmentBinding
 import com.example.foodx.ui.FoodViewModel
 import com.example.foodx.ui.MainActivity
@@ -30,6 +32,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (requireActivity() as MainActivity).viewModel
+
 
         viewModel.randomMeal.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -56,6 +59,9 @@ class HomeFragment : Fragment() {
             }
         }
 
+        binding.randomMealCard.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_mealFragment)
+        }
 
     }
 }
