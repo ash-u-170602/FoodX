@@ -1,4 +1,4 @@
-package com.example.foodx.ui
+package com.example.foodx.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.foodx.R
 import com.example.foodx.databinding.ActivityMainBinding
 import com.example.foodx.repository.FoodRepository
+import com.example.foodx.ui.FoodViewModel
+import com.example.foodx.ui.FoodViewModelProviderFactory
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewModel: FoodViewModel
