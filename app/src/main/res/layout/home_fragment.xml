@@ -17,7 +17,7 @@
                 android:id="@+id/linear_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:orientation="horizontal"
@@ -46,7 +46,6 @@
                 android:id="@+id/tv_would_you_like_to_eat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_minus15sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:fontFamily="@font/myfont"
                 android:text="What would you like to eat"
@@ -73,8 +72,8 @@
                 <ImageView
                     android:id="@+id/img_random_meal"
                     android:layout_width="match_parent"
-                    android:scaleType="centerCrop"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
             </androidx.cardview.widget.CardView>
 
             <TextView
