@@ -1,4 +1,4 @@
-package com.example.foodx.ui
+package com.example.foodx.ui.viewModels
 
 import android.app.Application
 import android.content.Context
@@ -9,6 +9,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.foodx.FoodApplication
+import com.example.foodx.models.CategoriesResponse
+import com.example.foodx.models.CategoryMeals
 import com.example.foodx.models.MealResponse
 import com.example.foodx.repository.FoodRepository
 import com.example.foodx.util.Resource
@@ -16,37 +18,70 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.io.IOException
 
-class FoodViewModel(
+class HomeViewModel(
     app: Application,
     val foodRepository: FoodRepository
 ) : AndroidViewModel(app) {
 
-    val randomMeal: MutableLiveData<Resource<MealResponse>> = MutableLiveData()
+    val randomMealLiveData: MutableLiveData<Resource<MealResponse>> = MutableLiveData()
+    var trendingMealLiveData: MutableLiveData<Resource<List<CategoryMeals>>> = MutableLiveData()
 
     init {
         getRandomMeal()
+        getTrendingMeal("Seafood")
     }
 
     fun getRandomMeal() = viewModelScope.launch {
         safeRandomMealCall()
     }
 
+    fun getTrendingMeal(categoryName: String) = viewModelScope.launch {
+        safeTrendingMealCall(categoryName)
+    }
+
+    private suspend fun safeTrendingMealCall(categoryName: String) {
+        trendingMealLiveData.postValue(Resource.Loading())
+        try {
+            if (hasInternetConnection()) {
+                val response = foodRepository.getTrendingMeal(categoryName)
+                trendingMealLiveData.postValue(handleTrendingMealResponse(response))
+            } else {
+                trendingMealLiveData.postValue(Resource.Error("No Internet Connection"))
+            }
+        } catch (t: Throwable) {
+            when (t) {
+                is IOException -> trendingMealLiveData.postValue(Resource.Error("Network Failure"))
+                else -> trendingMealLiveData.postValue(Resource.Error("Conversion Error"))
+            }
+        }
+    }
+
 
     private suspend fun safeRandomMealCall() {
-        randomMeal.postValue(Resource.Loading())
+        randomMealLiveData.postValue(Resource.Loading())
         try {
             if (hasInternetConnection()) {
                 val response = foodRepository.getRandomMeal()
-                randomMeal.postValue(handleRandomMealResponse(response))
+                randomMealLiveData.postValue(handleRandomMealResponse(response))
             } else {
-                randomMeal.postValue(Resource.Error("No Internet Connection"))
+                randomMealLiveData.postValue(Resource.Error("No Internet Connection"))
             }
-        } catch (t: Throwable){
-            when (t){
-                is IOException -> randomMeal.postValue(Resource.Error("Network Failure"))
-                else -> randomMeal.postValue(Resource.Error("Conversion Error"))
+        } catch (t: Throwable) {
+            when (t) {
+                is IOException -> randomMealLiveData.postValue(Resource.Error("Network Failure"))
+                else -> randomMealLiveData.postValue(Resource.Error("Conversion Error"))
             }
         }
+    }
+
+
+    private fun handleTrendingMealResponse(response: Response<CategoriesResponse>): Resource<List<CategoryMeals>> {
+        if (response.isSuccessful) {
+            response.body()?.let { resultResponse ->
+                return Resource.Success(resultResponse.meals)
+            }
+        }
+        return Resource.Error(response.message())
     }
 
     private fun handleRandomMealResponse(response: Response<MealResponse>): Resource<MealResponse> {

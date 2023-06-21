@@ -7,4 +7,6 @@ class FoodRepository {
     suspend fun getRandomMeal() =
         RetrofitInstance.api.getRandomMeal()
 
+    suspend fun getTrendingMeal(categoryName: String) =
+        RetrofitInstance.api.getTrendingMeal(categoryName)
 }

@@ -8,19 +8,19 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.foodx.R
 import com.example.foodx.databinding.ActivityMainBinding
 import com.example.foodx.repository.FoodRepository
-import com.example.foodx.ui.FoodViewModel
-import com.example.foodx.ui.FoodViewModelProviderFactory
+import com.example.foodx.ui.viewModels.HomeViewModel
+import com.example.foodx.ui.viewModels.HomeViewModelProviderFactory
 
 class MainActivity : AppCompatActivity() {
-    lateinit var viewModel: FoodViewModel
+    lateinit var viewModel: HomeViewModel
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         val foodRepository = FoodRepository()
-        val viewModelProviderFactory = FoodViewModelProviderFactory(application, foodRepository)
-        viewModel = ViewModelProvider(this, viewModelProviderFactory)[FoodViewModel::class.java]
+        val viewModelProviderFactory = HomeViewModelProviderFactory(application, foodRepository)
+        viewModel = ViewModelProvider(this, viewModelProviderFactory)[HomeViewModel::class.java]
 
         val bottomNav = binding.bottomNav
         val navHostFragment =
