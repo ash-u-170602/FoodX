@@ -12,4 +12,7 @@ class FoodRepository {
 
     suspend fun getMealDetails(id: String) =
         RetrofitInstance.api.getMealDetails(id)
+
+    suspend fun getCategories() =
+        RetrofitInstance.api.getCategories()
 }

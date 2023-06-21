@@ -1,6 +1,7 @@
 package com.example.foodx.api
 
 import com.example.foodx.models.CategoriesResponse
+import com.example.foodx.models.CategoryList
 import com.example.foodx.models.CategoryMeals
 import com.example.foodx.models.MealResponse
 import retrofit2.Response
@@ -17,4 +18,7 @@ interface FoodAPI {
 
     @GET("filter.php?")
     suspend fun getTrendingMeal(@Query("c") categoryName: String): Response<CategoriesResponse>
+
+    @GET("categories.php")
+    suspend fun getCategories(): Response<CategoryList>
 }

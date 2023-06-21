@@ -10,6 +10,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.foodx.FoodApplication
 import com.example.foodx.models.CategoriesResponse
+import com.example.foodx.models.Category
+import com.example.foodx.models.CategoryList
 import com.example.foodx.models.CategoryMeals
 import com.example.foodx.models.Meal
 import com.example.foodx.models.MealResponse
@@ -27,11 +29,18 @@ class HomeViewModel(
     val randomMealLiveData: MutableLiveData<Resource<MealResponse>> = MutableLiveData()
     var trendingMealLiveData: MutableLiveData<Resource<List<CategoryMeals>>> = MutableLiveData()
     val mealDetailLiveData: MutableLiveData<Resource<Meal>> = MutableLiveData()
+    val categoriesLiveData: MutableLiveData<Resource<List<Category>>> = MutableLiveData()
 
     init {
         getRandomMeal()
         getTrendingMeal("Seafood")
+        getCategories()
     }
+
+    private fun getCategories() = viewModelScope.launch {
+        safeCategoriesCall()
+    }
+
 
     fun getMealDetails(id: String) = viewModelScope.launch {
         safeMealDetailsCall(id)
@@ -95,6 +104,32 @@ class HomeViewModel(
                 else -> randomMealLiveData.postValue(Resource.Error("Conversion Error"))
             }
         }
+    }
+
+    private suspend fun safeCategoriesCall() {
+        categoriesLiveData.postValue(Resource.Loading())
+        try {
+            if (hasInternetConnection()) {
+                val response = foodRepository.getCategories()
+                categoriesLiveData.postValue(handleCategoryResponse(response))
+            } else {
+                categoriesLiveData.postValue(Resource.Error("No Internet Connection"))
+            }
+        } catch (t: Throwable) {
+            when (t) {
+                is IOException -> categoriesLiveData.postValue(Resource.Error("Network Failure"))
+                else -> categoriesLiveData.postValue(Resource.Error("Conversion Error"))
+            }
+        }
+    }
+
+    private fun handleCategoryResponse(response: Response<CategoryList>): Resource<List<Category>>{
+        if (response.isSuccessful) {
+            response.body()?.let { resultResponse ->
+                return Resource.Success(resultResponse.categories)
+            }
+        }
+        return Resource.Error(response.message())
     }
 
 
