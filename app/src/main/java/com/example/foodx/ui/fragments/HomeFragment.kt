@@ -2,15 +2,16 @@ package com.example.foodx.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.foodx.R
 import com.example.foodx.adapters.CategoriesAdapter
 import com.example.foodx.adapters.TrendingMealAdapter
 import com.example.foodx.databinding.HomeFragmentBinding
@@ -148,6 +149,11 @@ class HomeFragment : Fragment() {
             intent.putExtra(MEAL_THUMB, meal.strMealThumb)
             intent.putExtra(Meal_ID, meal.idMeal)
             startActivity(intent)
+        }
+
+        categoriesAdapter.onItemClick = { category ->
+            viewModel.setStrMeal(category.strCategory)
+            findNavController().navigate(R.id.action_homeFragment_to_categoryMealsFragment)
         }
 
     }

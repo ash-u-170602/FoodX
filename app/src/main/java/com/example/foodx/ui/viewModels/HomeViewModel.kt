@@ -30,11 +30,29 @@ class HomeViewModel(
     var trendingMealLiveData: MutableLiveData<Resource<List<CategoryMeals>>> = MutableLiveData()
     val mealDetailLiveData: MutableLiveData<Resource<Meal>> = MutableLiveData()
     val categoriesLiveData: MutableLiveData<Resource<List<Category>>> = MutableLiveData()
+    val mealByCategoryLiveData: MutableLiveData<Resource<List<CategoryMeals>>> = MutableLiveData()
+
+    private val _strMeal = MutableLiveData<String>()
+    val strMeal: MutableLiveData<String> = _strMeal
+
+    fun setStrMeal(data: String) {
+        _strMeal.value = data
+    }
 
     init {
         getRandomMeal()
         getTrendingMeal("Seafood")
         getCategories()
+    }
+
+    fun saveMeal(meal: CategoryMeals) = viewModelScope.launch {
+        foodRepository.upsert(meal)
+    }
+
+    fun getSavedMeal() = foodRepository.getSavedMeals()
+
+    fun deleteMeal(meal: CategoryMeals) = viewModelScope.launch {
+        foodRepository.deleteMeal(meal)
     }
 
     private fun getCategories() = viewModelScope.launch {
@@ -52,6 +70,27 @@ class HomeViewModel(
 
     fun getTrendingMeal(categoryName: String) = viewModelScope.launch {
         safeTrendingMealCall(categoryName)
+    }
+
+    fun getMealsByCategory(categoryName: String) = viewModelScope.launch {
+        safeMealsByCategoryCall(categoryName)
+    }
+
+    private suspend fun safeMealsByCategoryCall(categoryName: String) {
+        mealByCategoryLiveData.postValue(Resource.Loading())
+        try {
+            if (hasInternetConnection()) {
+                val response = foodRepository.getMealsByCategory(categoryName)
+                mealByCategoryLiveData.postValue(handleMealByCategoryResponse(response))
+            } else {
+                mealByCategoryLiveData.postValue(Resource.Error("No Internet Connection"))
+            }
+        } catch (t: Throwable) {
+            when (t) {
+                is IOException -> mealByCategoryLiveData.postValue(Resource.Error("Network Failure"))
+                else -> mealByCategoryLiveData.postValue(Resource.Error("Conversion Error"))
+            }
+        }
     }
 
     private suspend fun safeMealDetailsCall(id: String) {
@@ -123,7 +162,7 @@ class HomeViewModel(
         }
     }
 
-    private fun handleCategoryResponse(response: Response<CategoryList>): Resource<List<Category>>{
+    private fun handleCategoryResponse(response: Response<CategoryList>): Resource<List<Category>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return Resource.Success(resultResponse.categories)
@@ -134,6 +173,15 @@ class HomeViewModel(
 
 
     private fun handleTrendingMealResponse(response: Response<CategoriesResponse>): Resource<List<CategoryMeals>> {
+        if (response.isSuccessful) {
+            response.body()?.let { resultResponse ->
+                return Resource.Success(resultResponse.meals)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    private fun handleMealByCategoryResponse(response: Response<CategoriesResponse>): Resource<List<CategoryMeals>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return Resource.Success(resultResponse.meals)

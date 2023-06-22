@@ -21,4 +21,7 @@ interface FoodAPI {
 
     @GET("categories.php")
     suspend fun getCategories(): Response<CategoryList>
+
+    @GET("filter.php")
+    suspend fun getMealsByCategory(@Query("c")categoryName: String): Response<CategoriesResponse>
 }

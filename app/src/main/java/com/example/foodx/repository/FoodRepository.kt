@@ -1,8 +1,12 @@
 package com.example.foodx.repository
 
 import com.example.foodx.api.RetrofitInstance
+import com.example.foodx.db.MealDatabase
+import com.example.foodx.models.CategoryMeals
 
-class FoodRepository {
+class FoodRepository(
+    val db: MealDatabase
+) {
 
     suspend fun getRandomMeal() =
         RetrofitInstance.api.getRandomMeal()
@@ -15,4 +19,15 @@ class FoodRepository {
 
     suspend fun getCategories() =
         RetrofitInstance.api.getCategories()
+
+    suspend fun getMealsByCategory(categoryName: String) =
+        RetrofitInstance.api.getMealsByCategory(categoryName)
+
+
+
+    suspend fun upsert(meal: CategoryMeals) = db.getMealDao().upsert(meal)
+
+    suspend fun deleteMeal(meal: CategoryMeals) = db.getMealDao().deleteMeal(meal)
+
+    fun getSavedMeals() = db.getMealDao().getAllMeals()
 }

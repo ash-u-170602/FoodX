@@ -19,5 +19,14 @@
         tools:layout="@layout/home_fragment"
         android:id="@+id/homeFragment"
         android:name="com.example.foodx.ui.fragments.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_categoryMealsFragment"
+            app:destination="@id/categoryMealsFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/category_meal_fragment"
+        android:id="@+id/categoryMealsFragment"
+        android:name="com.example.foodx.ui.fragments.CategoryMealsFragment"
+        android:label="CategoryMealsFragment" />
 </navigation>

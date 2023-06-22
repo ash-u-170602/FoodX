@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.foodx.databinding.CategoryItemRecviewBinding
 import com.example.foodx.models.Category
+import com.example.foodx.models.CategoryMeals
 
 class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder>() {
 
@@ -14,6 +15,7 @@ class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.CategoryViewH
 
 
     private var categoryList = ArrayList<Category>()
+    lateinit var onItemClick:((Category) -> Unit)
 
     fun setCategoryList(categoryList: List<Category>) {
         this.categoryList = categoryList as ArrayList<Category>
@@ -38,6 +40,9 @@ class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.CategoryViewH
         Glide.with(holder.itemView).load(categoryList[position].strCategoryThumb)
             .into(holder.binding.imageCategory)
         holder.binding.tvCategoryName.text = categoryList[position].strCategory
+        holder.itemView.setOnClickListener {
+            onItemClick.invoke(categoryList[position])
+        }
     }
 
     override fun getItemCount(): Int {
