@@ -11,9 +11,9 @@
         android:name="com.example.foodx.ui.fragments.FavouritesFragment"
         android:label="FavouritesFragment" />
     <fragment
-        tools:layout="@layout/categories_fragment"
+        tools:layout="@layout/cuisine_fragment"
         android:id="@+id/categoriesFragment"
-        android:name="com.example.foodx.ui.fragments.CategoriesFragment"
+        android:name="com.example.foodx.ui.fragments.CuisineFragment"
         android:label="CategoriesFragment" />
     <fragment
         tools:layout="@layout/home_fragment"
