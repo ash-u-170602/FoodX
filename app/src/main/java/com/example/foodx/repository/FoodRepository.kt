@@ -14,6 +14,9 @@ class FoodRepository(
     suspend fun getTrendingMeal(categoryName: String) =
         RetrofitInstance.api.getTrendingMeal(categoryName)
 
+    suspend fun getCuisineMeal(cuisineName: String) =
+        RetrofitInstance.api.getCuisineMeal(cuisineName)
+
     suspend fun getMealDetails(id: String) =
         RetrofitInstance.api.getMealDetails(id)
 

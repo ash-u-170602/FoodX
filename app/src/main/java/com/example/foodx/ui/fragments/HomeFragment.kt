@@ -47,7 +47,12 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
 
-        viewModel.getRandomMeal()
+        viewModel.apply {
+            getRandomMeal()
+            getTrendingMeal("Seafood")
+            getCuisines()
+            getCategories()
+        }
 
         trendingMealAdapter = TrendingMealAdapter()
         categoriesAdapter = CategoriesAdapter()

@@ -14,7 +14,11 @@
         tools:layout="@layout/cuisine_fragment"
         android:id="@+id/categoriesFragment"
         android:name="com.example.foodx.ui.fragments.CuisineFragment"
-        android:label="CategoriesFragment" />
+        android:label="CategoriesFragment" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_cuisineMealFragment"
+            app:destination="@id/cuisineMealFragment" />
+    </fragment>
     <fragment
         tools:layout="@layout/home_fragment"
         android:id="@+id/homeFragment"
@@ -29,4 +33,8 @@
         android:id="@+id/categoryMealsFragment"
         android:name="com.example.foodx.ui.fragments.CategoryMealsFragment"
         android:label="CategoryMealsFragment" />
+    <fragment
+        android:id="@+id/cuisineMealFragment"
+        android:name="com.example.foodx.ui.fragments.CuisineMealFragment"
+        android:label="CuisineMealFragment" />
 </navigation>

@@ -16,12 +16,13 @@ import com.example.foodx.ui.viewModels.HomeViewModel
 import com.example.foodx.util.Constants
 import com.example.foodx.util.Resource
 
-class CategoryMealsFragment : Fragment() {
+class CuisineMealFragment : Fragment() {
     private val binding by lazy { CategoryMealFragmentBinding.inflate(layoutInflater) }
 
     private lateinit var viewModel: HomeViewModel
-    private lateinit var strCategory: String
     private lateinit var categoryMealAdapter: CategoryMealAdapter
+    private lateinit var strArea: String
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,17 +36,17 @@ class CategoryMealsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
 
+
         prepareRecyclerView()
 
 
-
-        viewModel.strMeal.observe(viewLifecycleOwner) {
-            strCategory = it
-            viewModel.getMealsByCategory(strCategory)
-            binding.tvHeading.text = "Category($strCategory)"
+        viewModel.strArea.observe(viewLifecycleOwner) {
+            strArea = it
+            viewModel.getCuisineMeal(it)
+            binding.tvHeading.text = "Cuisine($strArea)"
         }
 
-        viewModel.mealByCategoryLiveData.observe(viewLifecycleOwner) { response ->
+        viewModel.cuisineMealLiveData.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Resource.Success -> {
 //                    TODO("Hide progress bar")
@@ -76,10 +77,6 @@ class CategoryMealsFragment : Fragment() {
             startActivity(intent)
         }
 
-
-
-
-
     }
 
     private fun prepareRecyclerView() {
@@ -89,4 +86,5 @@ class CategoryMealsFragment : Fragment() {
             adapter = categoryMealAdapter
         }
     }
+
 }

@@ -23,7 +23,9 @@ class CategoryMealAdapter : RecyclerView.Adapter<CategoryMealAdapter.CategoryMea
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryMealsViewHolder {
         return CategoryMealsViewHolder(
             CategoryMealItemBinding.inflate(
-                LayoutInflater.from(parent.context)
+                LayoutInflater.from(parent.context),
+                parent,
+                false
             )
         )
     }
