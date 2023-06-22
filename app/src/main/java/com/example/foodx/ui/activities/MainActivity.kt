@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.foodx.R
 import com.example.foodx.databinding.ActivityMainBinding
+import com.example.foodx.db.MealDatabase
 import com.example.foodx.repository.FoodRepository
 import com.example.foodx.ui.viewModels.HomeViewModel
 import com.example.foodx.ui.viewModels.HomeViewModelProviderFactory
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val foodRepository = FoodRepository()
+        val foodRepository = FoodRepository(MealDatabase(this))
         val viewModelProviderFactory = HomeViewModelProviderFactory(application, foodRepository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory)[HomeViewModel::class.java]
 

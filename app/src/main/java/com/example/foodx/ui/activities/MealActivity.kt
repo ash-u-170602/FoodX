@@ -5,11 +5,15 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.foodx.R
 import com.example.foodx.databinding.ActivityMealBinding
+import com.example.foodx.db.MealDatabase
+import com.example.foodx.models.CategoryMeals
+import com.example.foodx.models.Meal
 import com.example.foodx.repository.FoodRepository
 import com.example.foodx.ui.viewModels.HomeViewModel
 import com.example.foodx.ui.viewModels.HomeViewModelProviderFactory
@@ -23,6 +27,7 @@ class MealActivity : AppCompatActivity() {
     private lateinit var strMeal: String
     private lateinit var strMealThumb: String
     private lateinit var mealId: String
+    private lateinit var mealToSave: CategoryMeals
 
     private lateinit var viewModel: HomeViewModel
 
@@ -31,7 +36,7 @@ class MealActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val foodRepository = FoodRepository()
+        val foodRepository = FoodRepository(MealDatabase(this))
         val viewModelProviderFactory = HomeViewModelProviderFactory(application, foodRepository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory)[HomeViewModel::class.java]
 
@@ -57,13 +62,17 @@ class MealActivity : AppCompatActivity() {
             }
         }
 
+        binding.floatingActionButton.setOnClickListener {
+            viewModel.saveMeal(mealToSave)
+            Toast.makeText(this, "${mealToSave.strMeal} saved", Toast.LENGTH_SHORT).show()
+        }
+
         Glide.with(this).load(strMealThumb).into(binding.imageMealDetail)
         binding.apply {
             collapsingToolbar.title = strMeal
             collapsingToolbar.setCollapsedTitleTextColor(resources.getColor(R.color.white))
             collapsingToolbar.setExpandedTitleColor(resources.getColor(R.color.white))
         }
-
     }
 
     private fun formatInstructionString(strInstructions: String): String {
@@ -84,9 +93,10 @@ class MealActivity : AppCompatActivity() {
         strMeal = intent.getStringExtra(MEAL_NAME)!!
         strMealThumb = intent.getStringExtra(MEAL_THUMB)!!
         mealId = intent.getStringExtra(Meal_ID)!!
+        mealToSave = CategoryMeals(mealId, strMeal, strMealThumb)
     }
 
-    private fun loading(){
+    private fun loading() {
         binding.apply {
             progressBar.visibility = View.VISIBLE
             floatingActionButton.visibility = View.INVISIBLE
@@ -97,7 +107,7 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadingEnd(){
+    private fun loadingEnd() {
         binding.apply {
             progressBar.visibility = View.INVISIBLE
             floatingActionButton.visibility = View.VISIBLE
