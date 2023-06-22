@@ -31,6 +31,7 @@ class HomeViewModel(
     val mealDetailLiveData: MutableLiveData<Resource<Meal>> = MutableLiveData()
     val categoriesLiveData: MutableLiveData<Resource<List<Category>>> = MutableLiveData()
     val mealByCategoryLiveData: MutableLiveData<Resource<List<CategoryMeals>>> = MutableLiveData()
+    val favouritesMealLiveData = getSavedMeal()
 
     private val _strMeal = MutableLiveData<String>()
     val strMeal: MutableLiveData<String> = _strMeal
