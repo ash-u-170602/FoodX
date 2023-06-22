@@ -13,6 +13,8 @@ import com.example.foodx.models.CategoriesResponse
 import com.example.foodx.models.Category
 import com.example.foodx.models.CategoryList
 import com.example.foodx.models.CategoryMeals
+import com.example.foodx.models.Cuisine
+import com.example.foodx.models.CuisineList
 import com.example.foodx.models.Meal
 import com.example.foodx.models.MealResponse
 import com.example.foodx.repository.FoodRepository
@@ -30,6 +32,7 @@ class HomeViewModel(
     var trendingMealLiveData: MutableLiveData<Resource<List<CategoryMeals>>> = MutableLiveData()
     val mealDetailLiveData: MutableLiveData<Resource<Meal>> = MutableLiveData()
     val categoriesLiveData: MutableLiveData<Resource<List<Category>>> = MutableLiveData()
+    val cuisinesLiveData: MutableLiveData<Resource<List<Cuisine>>> = MutableLiveData()
     val mealByCategoryLiveData: MutableLiveData<Resource<List<CategoryMeals>>> = MutableLiveData()
     val favouritesMealLiveData = getSavedMeal()
 
@@ -44,6 +47,7 @@ class HomeViewModel(
         getRandomMeal()
         getTrendingMeal("Seafood")
         getCategories()
+        getCuisines()
     }
 
     fun saveMeal(meal: CategoryMeals) = viewModelScope.launch {
@@ -58,6 +62,10 @@ class HomeViewModel(
 
     private fun getCategories() = viewModelScope.launch {
         safeCategoriesCall()
+    }
+
+    private fun getCuisines() = viewModelScope.launch {
+        safeCuisinesCall()
     }
 
 
@@ -163,10 +171,36 @@ class HomeViewModel(
         }
     }
 
+    private suspend fun safeCuisinesCall() {
+        cuisinesLiveData.postValue(Resource.Loading())
+        try {
+            if (hasInternetConnection()) {
+                val response = foodRepository.getCuisines()
+                cuisinesLiveData.postValue(handleCuisinesResponse(response))
+            } else {
+                cuisinesLiveData.postValue(Resource.Error("No Internet Connection"))
+            }
+        } catch (t: Throwable) {
+            when (t) {
+                is IOException -> cuisinesLiveData.postValue(Resource.Error("Network Failure"))
+                else -> cuisinesLiveData.postValue(Resource.Error("Conversion Error"))
+            }
+        }
+    }
+
     private fun handleCategoryResponse(response: Response<CategoryList>): Resource<List<Category>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return Resource.Success(resultResponse.categories)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    private fun handleCuisinesResponse(response: Response<CuisineList>): Resource<List<Cuisine>> {
+        if (response.isSuccessful) {
+            response.body()?.let { resultResponse ->
+                return Resource.Success(resultResponse.meals)
             }
         }
         return Resource.Error(response.message())

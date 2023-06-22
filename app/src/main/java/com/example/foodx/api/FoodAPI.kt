@@ -3,6 +3,7 @@ package com.example.foodx.api
 import com.example.foodx.models.CategoriesResponse
 import com.example.foodx.models.CategoryList
 import com.example.foodx.models.CategoryMeals
+import com.example.foodx.models.CuisineList
 import com.example.foodx.models.MealResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -24,4 +25,7 @@ interface FoodAPI {
 
     @GET("filter.php")
     suspend fun getMealsByCategory(@Query("c")categoryName: String): Response<CategoriesResponse>
+
+    @GET("list.php?a=list")
+    suspend fun getCuisines(): Response<CuisineList>
 }

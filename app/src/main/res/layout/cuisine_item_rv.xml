@@ -1,26 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- cuisine_item.xml -->
+<?xml version="1.0" encoding="utf-8"?><!-- cuisine_item.xml -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="@dimen/_10sdp">
 
     <ImageView
         android:id="@+id/cuisine_image"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:scaleType="centerCrop"/>
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/cuisine_name"
         android:layout_width="wrap_content"
+        android:fontFamily="@font/myfont"
+        android:layout_gravity="bottom"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:layout_marginStart="16dp"
-        android:text="India" />
+        android:layout_marginStart="@dimen/_16sdp"
+        android:text="India"
+        android:textStyle="bold"
+        android:textColor="@color/accent"
+        android:textSize="@dimen/_20ssp" />
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

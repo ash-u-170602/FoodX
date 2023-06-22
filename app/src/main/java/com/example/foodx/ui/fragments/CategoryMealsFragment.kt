@@ -2,7 +2,6 @@ package com.example.foodx.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.foodx.adapters.CategoryMealAdapter
 import com.example.foodx.databinding.CategoryMealFragmentBinding
-import com.example.foodx.models.CategoryMeals
 import com.example.foodx.ui.activities.MainActivity
 import com.example.foodx.ui.activities.MealActivity
 import com.example.foodx.ui.viewModels.HomeViewModel
@@ -43,8 +41,8 @@ class CategoryMealsFragment : Fragment() {
         viewModel.strMeal.observe(viewLifecycleOwner) {
             strCategory = it
             viewModel.getMealsByCategory(strCategory)
+            binding.tvHeading.text = "Category($strCategory)"
         }
-
 
 
         viewModel.mealByCategoryLiveData.observe(viewLifecycleOwner) { response ->

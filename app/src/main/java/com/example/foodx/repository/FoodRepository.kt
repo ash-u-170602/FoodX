@@ -23,6 +23,9 @@ class FoodRepository(
     suspend fun getMealsByCategory(categoryName: String) =
         RetrofitInstance.api.getMealsByCategory(categoryName)
 
+    suspend fun getCuisines() =
+        RetrofitInstance.api.getCuisines()
+
 
 
     suspend fun upsert(meal: CategoryMeals) = db.getMealDao().upsert(meal)
