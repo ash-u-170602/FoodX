@@ -77,9 +77,6 @@ class CategoryMealsFragment : Fragment() {
         }
 
 
-
-
-
     }
 
     private fun prepareRecyclerView() {

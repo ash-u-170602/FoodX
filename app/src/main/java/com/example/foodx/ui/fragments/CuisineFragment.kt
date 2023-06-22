@@ -19,7 +19,7 @@ class CuisineFragment : Fragment() {
     private val binding by lazy { CuisineFragmentBinding.inflate(layoutInflater) }
 
     private lateinit var viewModel: HomeViewModel
-    lateinit var cuisinesAdapter: CuisinesAdapter
+    private lateinit var cuisinesAdapter: CuisinesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +38,6 @@ class CuisineFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         prepareRecyclerView()
-
-
 
         viewModel.cuisinesLiveData.observe(viewLifecycleOwner) { response ->
             when (response) {

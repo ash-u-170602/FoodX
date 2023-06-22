@@ -25,7 +25,7 @@ import java.io.IOException
 
 class HomeViewModel(
     app: Application,
-    val foodRepository: FoodRepository
+    private val foodRepository: FoodRepository
 ) : AndroidViewModel(app) {
 
     val randomMealLiveData: MutableLiveData<Resource<MealResponse>> = MutableLiveData()
@@ -62,7 +62,7 @@ class HomeViewModel(
         foodRepository.upsert(meal)
     }
 
-    fun getSavedMeal() = foodRepository.getSavedMeals()
+    private fun getSavedMeal() = foodRepository.getSavedMeals()
 
     fun deleteMeal(meal: CategoryMeals) = viewModelScope.launch {
         foodRepository.deleteMeal(meal)
@@ -164,8 +164,6 @@ class HomeViewModel(
             }
         }
     }
-
-
 
 
     private suspend fun safeRandomMealCall() {

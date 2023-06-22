@@ -15,7 +15,7 @@ class FavouritesMealAdapter :
     inner class FavouritesMealAdapterViewHolder(val binding: CategoryMealItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    lateinit var onItemClick:((CategoryMeals) -> Unit)
+    lateinit var onItemClick: ((CategoryMeals) -> Unit)
 
     private val diffUtil = object : DiffUtil.ItemCallback<CategoryMeals>() {
         override fun areItemsTheSame(oldItem: CategoryMeals, newItem: CategoryMeals): Boolean {

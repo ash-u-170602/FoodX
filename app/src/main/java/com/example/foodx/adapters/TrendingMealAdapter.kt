@@ -9,7 +9,7 @@ import com.example.foodx.models.CategoryMeals
 
 class TrendingMealAdapter() : RecyclerView.Adapter<TrendingMealAdapter.TrendingMealViewHolder>() {
 
-    lateinit var onItemClick:((CategoryMeals) -> Unit)
+    lateinit var onItemClick: ((CategoryMeals) -> Unit)
 
     private var mealList = ArrayList<CategoryMeals>()
     fun setMeal(mealsList: ArrayList<CategoryMeals>) {

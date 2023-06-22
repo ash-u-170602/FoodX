@@ -7,8 +7,8 @@ import com.example.foodx.repository.FoodRepository
 
 class HomeViewModelProviderFactory(
     val app: Application,
-    val foodRepository: FoodRepository
-): ViewModelProvider.Factory {
+    private val foodRepository: FoodRepository
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return HomeViewModel(app, foodRepository) as T
     }

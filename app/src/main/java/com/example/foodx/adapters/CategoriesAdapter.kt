@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.foodx.databinding.CategoryItemRecviewBinding
 import com.example.foodx.models.Category
-import com.example.foodx.models.CategoryMeals
 
 class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder>() {
 
@@ -15,7 +14,7 @@ class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.CategoryViewH
 
 
     private var categoryList = ArrayList<Category>()
-    lateinit var onItemClick:((Category) -> Unit)
+    lateinit var onItemClick: ((Category) -> Unit)
 
     fun setCategoryList(categoryList: List<Category>) {
         this.categoryList = categoryList as ArrayList<Category>

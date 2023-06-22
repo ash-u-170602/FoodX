@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodx.databinding.CuisineItemRvBinding
-import com.example.foodx.models.CategoryMeals
 import com.example.foodx.models.Cuisine
 
 class CuisinesAdapter : RecyclerView.Adapter<CuisinesAdapter.CuisinesAdapterViewHolder>() {
@@ -13,7 +12,7 @@ class CuisinesAdapter : RecyclerView.Adapter<CuisinesAdapter.CuisinesAdapterView
         RecyclerView.ViewHolder(binding.root)
 
     private var cuisineList = ArrayList<Cuisine>()
-    lateinit var onItemClick:((Cuisine) -> Unit)
+    lateinit var onItemClick: ((Cuisine) -> Unit)
 
 
     fun setCuisineList(cuisineList: List<Cuisine>) {

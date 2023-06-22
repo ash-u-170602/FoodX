@@ -13,7 +13,6 @@ import com.example.foodx.R
 import com.example.foodx.databinding.ActivityMealBinding
 import com.example.foodx.db.MealDatabase
 import com.example.foodx.models.CategoryMeals
-import com.example.foodx.models.Meal
 import com.example.foodx.repository.FoodRepository
 import com.example.foodx.ui.viewModels.HomeViewModel
 import com.example.foodx.ui.viewModels.HomeViewModelProviderFactory

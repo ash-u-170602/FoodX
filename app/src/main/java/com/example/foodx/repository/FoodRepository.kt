@@ -30,7 +30,6 @@ class FoodRepository(
         RetrofitInstance.api.getCuisines()
 
 
-
     suspend fun upsert(meal: CategoryMeals) = db.getMealDao().upsert(meal)
 
     suspend fun deleteMeal(meal: CategoryMeals) = db.getMealDao().deleteMeal(meal)

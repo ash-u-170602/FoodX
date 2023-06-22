@@ -12,7 +12,7 @@ class CategoryMealAdapter : RecyclerView.Adapter<CategoryMealAdapter.CategoryMea
         RecyclerView.ViewHolder(binding.root)
 
     private var mealsList = ArrayList<CategoryMeals>()
-    lateinit var onItemClick:((CategoryMeals) -> Unit)
+    lateinit var onItemClick: ((CategoryMeals) -> Unit)
 
     fun setMealsList(mealsList: List<CategoryMeals>) {
         this.mealsList = mealsList as ArrayList<CategoryMeals>

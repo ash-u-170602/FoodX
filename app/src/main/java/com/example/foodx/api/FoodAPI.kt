@@ -2,7 +2,6 @@ package com.example.foodx.api
 
 import com.example.foodx.models.CategoriesResponse
 import com.example.foodx.models.CategoryList
-import com.example.foodx.models.CategoryMeals
 import com.example.foodx.models.CuisineList
 import com.example.foodx.models.MealResponse
 import retrofit2.Response
@@ -15,7 +14,7 @@ interface FoodAPI {
     suspend fun getRandomMeal(): Response<MealResponse>
 
     @GET("lookup.php?")
-    suspend fun getMealDetails(@Query("i")id: String) : Response<MealResponse>
+    suspend fun getMealDetails(@Query("i") id: String): Response<MealResponse>
 
     @GET("filter.php?")
     suspend fun getTrendingMeal(@Query("c") categoryName: String): Response<CategoriesResponse>
@@ -24,7 +23,7 @@ interface FoodAPI {
     suspend fun getCategories(): Response<CategoryList>
 
     @GET("filter.php")
-    suspend fun getMealsByCategory(@Query("c")categoryName: String): Response<CategoriesResponse>
+    suspend fun getMealsByCategory(@Query("c") categoryName: String): Response<CategoriesResponse>
 
     @GET("list.php?a=list")
     suspend fun getCuisines(): Response<CuisineList>
