@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,9 @@ import com.example.foodx.util.Constants.Companion.MEAL_NAME
 import com.example.foodx.util.Constants.Companion.MEAL_THUMB
 import com.example.foodx.util.Constants.Companion.Meal_ID
 import com.example.foodx.util.Resource
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     private val binding by lazy { HomeFragmentBinding.inflate(layoutInflater) }
@@ -37,6 +41,11 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.getRandomMeal()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding.lottieAnimationLoading.setAnimationFromUrl("https://assets2.lottiefiles.com/packages/lf20_d2yblndy.json")
     }
 
     override fun onCreateView(
@@ -105,7 +114,12 @@ class HomeFragment : Fragment() {
                         Glide.with(requireContext()).load(imageURL).into(binding.imgRandomMeal)
                         this.randomMeal = randomMeal
                     }
-                    binding.swipeToRefresh.isRefreshing = false
+                    binding.apply {
+                        swipeToRefresh.isRefreshing = false
+                        scrollView.visibility = View.VISIBLE
+                        lottieAnimationLoading.visibility = View.GONE
+                        lottieAnimationLoading.cancelAnimation()
+                    }
                 }
 
                 is Resource.Error -> {
