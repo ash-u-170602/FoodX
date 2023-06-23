@@ -11,12 +11,14 @@
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/camera"
         android:layout_width="@dimen/_60sdp"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
         android:layout_height="@dimen/_60sdp"
-        android:layout_marginStart="@dimen/_45sdp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.191"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
         app:lottie_url="https://assets7.lottiefiles.com/packages/lf20_cQ5yfs.json" />
 
     <TextView
@@ -34,12 +36,14 @@
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/files"
         android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.814"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        android:layout_height="@dimen/_60sdp"
-        android:layout_marginEnd="@dimen/_45sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:lottie_url="https://assets7.lottiefiles.com/private_files/lf30_a5ghwfwe.json" />
 
     <TextView

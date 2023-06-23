@@ -18,4 +18,18 @@ class CameraBottomSheet: BottomSheetDialogFragment() {
     ): View {
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        binding.camera.setOnClickListener {
+
+        }
+
+
+        binding.files.setOnClickListener {
+
+        }
+    }
 }
