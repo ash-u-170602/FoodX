@@ -13,10 +13,13 @@ interface FoodAPI {
     @GET("random.php")
     suspend fun getRandomMeal(): Response<MealResponse>
 
-    @GET("lookup.php?")
+    @GET("lookup.php")
     suspend fun getMealDetails(@Query("i") id: String): Response<MealResponse>
 
-    @GET("filter.php?")
+    @GET("search.php")
+    suspend fun searchMeals(@Query("s") searchQuery: String): Response<MealResponse>
+
+    @GET("filter.php")
     suspend fun getTrendingMeal(@Query("c") categoryName: String): Response<CategoriesResponse>
 
     @GET("categories.php")
@@ -28,6 +31,6 @@ interface FoodAPI {
     @GET("list.php?a=list")
     suspend fun getCuisines(): Response<CuisineList>
 
-    @GET("filter.php?")
+    @GET("filter.php")
     suspend fun getCuisineMeal(@Query("a") cuisineName: String): Response<CategoriesResponse>
 }

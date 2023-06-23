@@ -32,6 +32,7 @@ class HomeViewModel(
     var trendingMealLiveData: MutableLiveData<Resource<List<CategoryMeals>>> = MutableLiveData()
     var cuisineMealLiveData: MutableLiveData<Resource<List<CategoryMeals>>> = MutableLiveData()
     val mealDetailLiveData: MutableLiveData<Resource<Meal>> = MutableLiveData()
+    val searchMealLiveData: MutableLiveData<Resource<List<Meal>>> = MutableLiveData()
     val categoriesLiveData: MutableLiveData<Resource<List<Category>>> = MutableLiveData()
     val cuisinesLiveData: MutableLiveData<Resource<List<Cuisine>>> = MutableLiveData()
     val mealByCategoryLiveData: MutableLiveData<Resource<List<CategoryMeals>>> = MutableLiveData()
@@ -81,6 +82,10 @@ class HomeViewModel(
         safeMealDetailsCall(id)
     }
 
+    fun searchMeals(searchQuery: String) = viewModelScope.launch {
+        safeSearchMealsCall(searchQuery)
+    }
+
     fun getRandomMeal() = viewModelScope.launch {
         safeRandomMealCall()
     }
@@ -127,6 +132,23 @@ class HomeViewModel(
             when (t) {
                 is IOException -> mealDetailLiveData.postValue(Resource.Error("Network Failure"))
                 else -> mealDetailLiveData.postValue(Resource.Error("Conversion Error"))
+            }
+        }
+    }
+
+    private suspend fun safeSearchMealsCall(searchQuery: String) {
+        searchMealLiveData.postValue(Resource.Loading())
+        try {
+            if (hasInternetConnection()) {
+                val response = foodRepository.searchMeals(searchQuery)
+                searchMealLiveData.postValue(handleSearchMealResponse(response))
+            } else {
+                searchMealLiveData.postValue(Resource.Error("No Internet Connection"))
+            }
+        } catch (t: Throwable) {
+            when (t) {
+                is IOException -> searchMealLiveData.postValue(Resource.Error("Network Failure"))
+                else -> searchMealLiveData.postValue(Resource.Error("Conversion Error"))
             }
         }
     }
@@ -276,6 +298,15 @@ class HomeViewModel(
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return Resource.Success(resultResponse.meals[0])
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    private fun handleSearchMealResponse(response: Response<MealResponse>): Resource<List<Meal>> {
+        if (response.isSuccessful) {
+            response.body()?.let { resultResponse ->
+                return Resource.Success(resultResponse.meals)
             }
         }
         return Resource.Error(response.message())

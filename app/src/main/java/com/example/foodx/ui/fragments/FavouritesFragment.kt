@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodx.R
-import com.example.foodx.adapters.FavouritesMealAdapter
+import com.example.foodx.adapters.MealAdapter
 import com.example.foodx.databinding.FavouritesFragmentBinding
 import com.example.foodx.ui.activities.MainActivity
 import com.example.foodx.ui.activities.MealActivity
@@ -22,7 +22,7 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment) {
     private val binding by lazy { FavouritesFragmentBinding.inflate(layoutInflater) }
 
     private lateinit var viewModel: HomeViewModel
-    private lateinit var favouritesMealAdapter: FavouritesMealAdapter
+    private lateinit var mealAdapter: MealAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +42,10 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment) {
 
         prepareRecyclerView()
         viewModel.favouritesMealLiveData.observe(requireActivity()) { meals ->
-            favouritesMealAdapter.differ.submitList(meals)
+            mealAdapter.differ.submitList(meals)
         }
 
-        favouritesMealAdapter.onItemClick = { meal ->
+        mealAdapter.onItemClick = { meal ->
             val intent = Intent(activity, MealActivity::class.java)
             intent.putExtra(Constants.MEAL_NAME, meal.strMeal)
             intent.putExtra(Constants.MEAL_THUMB, meal.strMealThumb)
@@ -68,7 +68,7 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment) {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                val meal = favouritesMealAdapter.differ.currentList[position]
+                val meal = mealAdapter.differ.currentList[position]
                 viewModel.deleteMeal(meal)
                 Snackbar.make(requireView(), "Meal deleted", Snackbar.LENGTH_LONG).setAction(
                     "Undo",
@@ -84,10 +84,10 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment) {
     }
 
     private fun prepareRecyclerView() {
-        favouritesMealAdapter = FavouritesMealAdapter()
+        mealAdapter = MealAdapter()
         binding.rvFavourites.apply {
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
-            adapter = favouritesMealAdapter
+            adapter = mealAdapter
         }
 
     }

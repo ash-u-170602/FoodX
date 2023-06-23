@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_homeFragment_to_categoryMealsFragment"
             app:destination="@id/categoryMealsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/category_meal_fragment"
@@ -37,4 +40,8 @@
         android:id="@+id/cuisineMealFragment"
         android:name="com.example.foodx.ui.fragments.CuisineMealFragment"
         android:label="CuisineMealFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.foodx.ui.fragments.SearchFragment"
+        android:label="SearchFragment" />
 </navigation>

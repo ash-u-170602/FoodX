@@ -34,6 +34,11 @@ class HomeFragment : Fragment() {
     private lateinit var categoriesAdapter: CategoriesAdapter
 
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getRandomMeal()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,15 +52,14 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
 
-        viewModel.apply {
-            getRandomMeal()
-            getTrendingMeal("Seafood")
-            getCuisines()
-            getCategories()
+        binding.swipeToRefresh.setOnRefreshListener {
+            viewModel.getRandomMeal()
         }
+
 
         trendingMealAdapter = TrendingMealAdapter()
         categoriesAdapter = CategoriesAdapter()
+
 
         binding.rvTrendingMeals.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
@@ -101,6 +105,7 @@ class HomeFragment : Fragment() {
                         Glide.with(requireContext()).load(imageURL).into(binding.imgRandomMeal)
                         this.randomMeal = randomMeal
                     }
+                    binding.swipeToRefresh.isRefreshing = false
                 }
 
                 is Resource.Error -> {
@@ -159,6 +164,10 @@ class HomeFragment : Fragment() {
         categoriesAdapter.onItemClick = { category ->
             viewModel.setStrMeal(category.strCategory)
             findNavController().navigate(R.id.action_homeFragment_to_categoryMealsFragment)
+        }
+
+        binding.imgSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
         }
 
     }

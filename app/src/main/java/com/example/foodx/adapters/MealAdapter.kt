@@ -9,8 +9,8 @@ import com.bumptech.glide.Glide
 import com.example.foodx.databinding.CategoryMealItemBinding
 import com.example.foodx.models.CategoryMeals
 
-class FavouritesMealAdapter :
-    RecyclerView.Adapter<FavouritesMealAdapter.FavouritesMealAdapterViewHolder>() {
+class MealAdapter :
+    RecyclerView.Adapter<MealAdapter.FavouritesMealAdapterViewHolder>() {
 
     inner class FavouritesMealAdapterViewHolder(val binding: CategoryMealItemBinding) :
         RecyclerView.ViewHolder(binding.root)

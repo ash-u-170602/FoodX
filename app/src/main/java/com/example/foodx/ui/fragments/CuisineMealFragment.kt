@@ -23,6 +23,10 @@ class CuisineMealFragment : Fragment() {
     private lateinit var categoryMealAdapter: CategoryMealAdapter
     private lateinit var strArea: String
 
+    override fun onResume() {
+        super.onResume()
+        loading()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +42,7 @@ class CuisineMealFragment : Fragment() {
 
 
         prepareRecyclerView()
+        loading()
 
 
         viewModel.strArea.observe(viewLifecycleOwner) {
@@ -49,10 +54,11 @@ class CuisineMealFragment : Fragment() {
         viewModel.cuisineMealLiveData.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Resource.Success -> {
-//                    TODO("Hide progress bar")
+
                     response.data?.let { mealList ->
                         categoryMealAdapter.setMealsList(mealList)
                     }
+                    loadingStop()
                 }
 
                 is Resource.Error -> {
@@ -77,6 +83,14 @@ class CuisineMealFragment : Fragment() {
             startActivity(intent)
         }
 
+    }
+
+    private fun loadingStop() {
+        binding.progressBar.visibility = View.GONE
+    }
+
+    private fun loading() {
+        binding.progressBar.visibility = View.VISIBLE
     }
 
     private fun prepareRecyclerView() {
