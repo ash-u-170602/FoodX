@@ -23,10 +23,6 @@ class CuisineMealFragment : Fragment() {
     private lateinit var categoryMealAdapter: CategoryMealAdapter
     private lateinit var strArea: String
 
-    override fun onResume() {
-        super.onResume()
-        loading()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,6 +67,7 @@ class CuisineMealFragment : Fragment() {
 
                 is Resource.Loading -> {
 //                    showProgressBar()
+                    loading()
                 }
             }
         }

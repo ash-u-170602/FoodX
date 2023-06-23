@@ -20,6 +20,7 @@ import com.example.foodx.models.CategoryMeals
 import com.example.foodx.models.Meal
 import com.example.foodx.ui.activities.MainActivity
 import com.example.foodx.ui.activities.MealActivity
+import com.example.foodx.ui.bottomSheets.CameraBottomSheet
 import com.example.foodx.ui.viewModels.HomeViewModel
 import com.example.foodx.util.Constants.Companion.MEAL_NAME
 import com.example.foodx.util.Constants.Companion.MEAL_THUMB
@@ -182,6 +183,11 @@ class HomeFragment : Fragment() {
 
         binding.imgSearch.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        }
+
+        binding.imgCamera.setOnClickListener {
+            val cameraBottomSheet = CameraBottomSheet()
+            cameraBottomSheet.show(parentFragmentManager, "cameraBottomSheet")
         }
 
     }
