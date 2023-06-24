@@ -39,6 +39,7 @@ class CameraBottomSheet : BottomSheetDialogFragment() {
         }
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 10) {
             if (data != null) {

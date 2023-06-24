@@ -22,6 +22,7 @@ import com.example.foodx.util.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.io.IOException
+import kotlin.random.Random
 
 class HomeViewModel(
     app: Application,
@@ -53,8 +54,17 @@ class HomeViewModel(
     }
 
     init {
+
+        when(Random.nextInt(1, 6)){
+            1 -> getTrendingMeal("Beef")
+            2 -> getTrendingMeal("Breakfast")
+            3 -> getTrendingMeal("Chicken")
+            4 -> getTrendingMeal("Pork")
+            5 -> getTrendingMeal("Vegetarian")
+            6 -> getTrendingMeal("Dessert")
+        }
+
         getRandomMeal()
-        getTrendingMeal("Seafood")
         getCategories()
         getCuisines()
     }
@@ -90,7 +100,7 @@ class HomeViewModel(
         safeRandomMealCall()
     }
 
-    fun getTrendingMeal(categoryName: String) = viewModelScope.launch {
+    private fun getTrendingMeal(categoryName: String) = viewModelScope.launch {
         safeTrendingMealCall(categoryName)
     }
 
