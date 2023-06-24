@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+
         val foodRepository = FoodRepository(MealDatabase(this))
         val viewModelProviderFactory = HomeViewModelProviderFactory(application, foodRepository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory)[HomeViewModel::class.java]
