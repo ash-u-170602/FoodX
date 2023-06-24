@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.lottie.LottieCompositionFactory
+import com.airbnb.lottie.LottieDrawable
 import com.bumptech.glide.Glide
 import com.example.foodx.R
 import com.example.foodx.adapters.CategoriesAdapter
@@ -26,9 +27,6 @@ import com.example.foodx.util.Constants.Companion.MEAL_NAME
 import com.example.foodx.util.Constants.Companion.MEAL_THUMB
 import com.example.foodx.util.Constants.Companion.Meal_ID
 import com.example.foodx.util.Resource
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     private val binding by lazy { HomeFragmentBinding.inflate(layoutInflater) }
@@ -104,7 +102,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-
         viewModel.randomMealLiveData.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Resource.Success -> {
@@ -112,7 +109,23 @@ class HomeFragment : Fragment() {
                     response.data?.let { mealResponse ->
                         val randomMeal = mealResponse.meals[0]
                         val imageURL = randomMeal.strMealThumb
-                        Glide.with(requireContext()).load(imageURL).into(binding.imgRandomMeal)
+
+                        LottieCompositionFactory.fromRawRes(requireContext(), R.raw.loading2)
+                            .addListener { composition ->
+                                val drawable = LottieDrawable().apply {
+                                    setComposition(composition)
+                                    playAnimation()
+                                    repeatCount = LottieDrawable.INFINITE
+                                    start()
+                                }
+                                binding.imgRandomMeal.setImageDrawable(drawable)
+                            }
+
+                        Glide.with(requireContext())
+                            .load(imageURL)
+                            .placeholder(binding.imgRandomMeal.drawable)
+                            .into(binding.imgRandomMeal)
+
                         this.randomMeal = randomMeal
                     }
                     binding.apply {
@@ -191,4 +204,5 @@ class HomeFragment : Fragment() {
         }
 
     }
+
 }
