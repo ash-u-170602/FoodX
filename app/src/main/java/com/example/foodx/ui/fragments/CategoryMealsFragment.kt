@@ -24,7 +24,6 @@ class CategoryMealsFragment : Fragment() {
     private lateinit var categoryMealAdapter: CategoryMealAdapter
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

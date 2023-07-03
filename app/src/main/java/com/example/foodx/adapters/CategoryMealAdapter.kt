@@ -31,8 +31,11 @@ class CategoryMealAdapter : RecyclerView.Adapter<CategoryMealAdapter.CategoryMea
     }
 
     override fun onBindViewHolder(holder: CategoryMealsViewHolder, position: Int) {
+
         Glide.with(holder.itemView).load(mealsList[position].strMealThumb)
             .into(holder.binding.imageCategoryMeal)
+
+
         holder.binding.tvCategoryMealName.text = mealsList[position].strMeal
         holder.itemView.setOnClickListener {
             onItemClick.invoke(mealsList[position])

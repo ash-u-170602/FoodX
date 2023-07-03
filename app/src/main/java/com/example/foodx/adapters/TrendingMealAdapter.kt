@@ -3,10 +3,7 @@ package com.example.foodx.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.lottie.LottieCompositionFactory
-import com.airbnb.lottie.LottieDrawable
 import com.bumptech.glide.Glide
-import com.example.foodx.R
 import com.example.foodx.databinding.TrendingItemRecviewBinding
 import com.example.foodx.models.CategoryMeals
 

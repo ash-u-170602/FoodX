@@ -55,7 +55,7 @@ class HomeViewModel(
 
     init {
 
-        when(Random.nextInt(1, 6)){
+        when (Random.nextInt(1, 6)) {
             1 -> getTrendingMeal("Beef")
             2 -> getTrendingMeal("Breakfast")
             3 -> getTrendingMeal("Chicken")

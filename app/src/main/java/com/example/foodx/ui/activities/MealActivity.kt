@@ -52,7 +52,7 @@ class MealActivity : AppCompatActivity() {
                     loadingEnd()
                     tvCategory.text = "Category: ${meal.strCategory}"
                     tvArea.text = "Cuisine: ${meal.strArea}"
-                    tvInstructionsSteps.text = formatInstructionString(meal.strInstructions)
+                    tvInstructionsSteps.text = meal.strInstructions
                     imgYoutube.setOnClickListener {
                         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(meal.strYoutube))
                         startActivity(intent)
@@ -74,18 +74,6 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
-    private fun formatInstructionString(strInstructions: String): String {
-        var count = 1
-        val lines = strInstructions.split("\r\n")
-        val stringBuilder = StringBuilder()
-
-        for (line in lines) {
-            stringBuilder.append("$count. $line\n\n")
-            count++
-        }
-
-        return stringBuilder.toString()
-    }
 
     private fun getMealInformationFromIntent() {
         val intent = intent
