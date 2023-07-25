@@ -2,13 +2,17 @@ package com.example.foodx.ui.bottomSheets
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore.Images.Media
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
 import com.example.foodx.databinding.CameraBottomSheetBinding
+import com.example.foodx.ml.LiteModelAiyVisionClassifierFoodV11
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import org.tensorflow.lite.support.image.TensorImage
 
 class CameraBottomSheet : BottomSheetDialogFragment() {
     private val binding by lazy { CameraBottomSheetBinding.inflate(layoutInflater) }
@@ -46,6 +50,27 @@ class CameraBottomSheet : BottomSheetDialogFragment() {
             if (data != null) {
                 val uri = data.data
                 try {
+
+                    //Getting bitmap of the selected image's uri
+                    val bitmap = Media.getBitmap(requireContext().contentResolver, uri)
+
+                    //Open model
+                    val model = LiteModelAiyVisionClassifierFoodV11.newInstance(requireContext())
+
+                    // Creates inputs for reference.
+                    val image = TensorImage.fromBitmap(bitmap)
+
+                    // Runs model inference and gets result.
+                    val outputs = model.process(image)
+                    val probability = outputs.probabilityAsCategoryList
+
+                    // Releases model resources if no longer used.
+                    model.close()
+
+                    probability.forEach {
+                        Log.d("lololol", it.toString())
+                    }
+
 
 
                 } catch (e: java.lang.Exception) {

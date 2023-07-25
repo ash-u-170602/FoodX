@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -42,9 +43,11 @@ class HomeViewModel(
     private val _strMeal = MutableLiveData<String>()
     val strMeal: MutableLiveData<String> = _strMeal
 
+
     fun setStrMeal(data: String) {
         _strMeal.value = data
     }
+
 
     private val _strArea = MutableLiveData<String>()
     val strArea: MutableLiveData<String> = _strArea
