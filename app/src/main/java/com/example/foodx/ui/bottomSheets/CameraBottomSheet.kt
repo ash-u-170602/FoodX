@@ -73,6 +73,8 @@ class CameraBottomSheet : BottomSheetDialogFragment() {
 
 
 
+
+
                 } catch (e: java.lang.Exception) {
                     e.printStackTrace()
                     Toast.makeText(requireContext(), "Something went wrong!!", Toast.LENGTH_SHORT)
