@@ -10,14 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodx.R
 import com.example.foodx.adapters.PredictionAdapter
 import com.example.foodx.databinding.PredictionFragmentBinding
-import com.example.foodx.databinding.SearchFragmentBinding
 import com.example.foodx.ui.activities.MainActivity
 import com.example.foodx.ui.viewModels.HomeViewModel
 
 class PredictionFragment : Fragment() {
     private val binding by lazy { PredictionFragmentBinding.inflate(layoutInflater) }
-    private val bindingForResult by lazy { SearchFragmentBinding.inflate(layoutInflater) }
-
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var predictionAdapter: PredictionAdapter
@@ -28,8 +25,6 @@ class PredictionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return binding.root
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,7 +40,6 @@ class PredictionFragment : Fragment() {
 
             findNavController().navigate(R.id.action_predictionFragment_to_searchFragment)
         }
-
     }
 
     private fun prepareRecyclerView() {

@@ -1,6 +1,8 @@
 package com.example.foodx.ui.bottomSheets
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -73,12 +75,38 @@ class CameraBottomSheet : BottomSheetDialogFragment() {
             }
         }
 
-        if (requestCode == REQUEST_IMAGE_CAPTURE) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             if (data != null) {
-                var uri = data.data
+//                val uri = data.data
+                val imageBitmap = data.extras?.get("data") as Bitmap
 
                 try {
-                    startML(uri)
+
+                    val model = LiteModelAiyVisionClassifierFoodV11.newInstance(requireContext())
+
+                    // Creates inputs for reference.
+                    val image = TensorImage.fromBitmap(imageBitmap)
+
+                    // Runs model inference and gets result.
+                    val outputs = model.process(image)
+                    val probability = outputs.probabilityAsCategoryList
+
+                    // Releases model resources if no longer used.
+                    model.close()
+
+                    val sortedList = probability.sortedByDescending { it.score }
+                    val top5Items = sortedList.take(5)
+
+                    top5Items.forEach {
+                        Log.d("lolol", it.toString())
+                    }
+
+                    viewModel.setPredictionList(top5Items)
+
+                    findNavController().navigate(R.id.action_homeFragment_to_predictionFragment)
+                    dismiss()
+
+
                 } catch (e: java.lang.Exception) {
                     e.printStackTrace()
                     Toast.makeText(requireContext(), "Something went wrong!!", Toast.LENGTH_SHORT)
