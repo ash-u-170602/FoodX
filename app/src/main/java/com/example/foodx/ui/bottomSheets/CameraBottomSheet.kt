@@ -27,7 +27,6 @@ class CameraBottomSheet : BottomSheetDialogFragment() {
 
     private lateinit var viewModel: HomeViewModel
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -87,7 +86,6 @@ class CameraBottomSheet : BottomSheetDialogFragment() {
                 }
             }
         }
-
 
         super.onActivityResult(requestCode, resultCode, data)
     }

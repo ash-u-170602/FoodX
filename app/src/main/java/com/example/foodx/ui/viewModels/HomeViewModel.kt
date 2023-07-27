@@ -43,6 +43,7 @@ class HomeViewModel(
     val strMeal: MutableLiveData<String> = _strMeal
 
 
+
     var predictionList = ArrayList<org.tensorflow.lite.support.label.Category>()
     fun setPredictionList(list: List<org.tensorflow.lite.support.label.Category>){
         predictionList = list as ArrayList<org.tensorflow.lite.support.label.Category>

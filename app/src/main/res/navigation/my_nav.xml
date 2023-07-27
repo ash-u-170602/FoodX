@@ -53,5 +53,9 @@
         tools:layout="@layout/prediction_fragment"
         android:id="@+id/predictionFragment"
         android:name="com.example.foodx.ui.fragments.PredictionFragment"
-        android:label="PredictionFragment" />
+        android:label="PredictionFragment" >
+        <action
+            android:id="@+id/action_predictionFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
 </navigation>

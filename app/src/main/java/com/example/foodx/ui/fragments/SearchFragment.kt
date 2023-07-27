@@ -75,7 +75,6 @@ class SearchFragment : Fragment() {
                         }
 
                         searchRecyclerViewAdapter.differ.submitList(listOfCategoryMeals)
-                        searchRecyclerViewAdapter.notifyDataSetChanged()
                     }
                     loadingStop()
                 }

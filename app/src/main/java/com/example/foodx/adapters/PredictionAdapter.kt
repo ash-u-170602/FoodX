@@ -12,6 +12,7 @@ class PredictionAdapter : RecyclerView.Adapter<PredictionAdapter.PredictionAdapt
         RecyclerView.ViewHolder(binding.root)
 
     private var predictionList = ArrayList<Category>()
+    lateinit var onItemClick: ((Category) -> Unit)
 
     fun setPredictionList(predictionList: List<Category>) {
         this.predictionList = predictionList as ArrayList<Category>
@@ -30,12 +31,16 @@ class PredictionAdapter : RecyclerView.Adapter<PredictionAdapter.PredictionAdapt
 
     override fun onBindViewHolder(holder: PredictionAdapterViewHolder, position: Int) {
         val meal = predictionList[position]
-        holder.binding.serialNumber.text = "${position+1}. "
+        holder.binding.serialNumber.text = "${position + 1}. "
         holder.binding.meal.text = meal.label.toString()
 
-        val score = meal.score*100
-        
+        val score = meal.score * 100
+
         holder.binding.percentage.text = "${score.toInt()}%"
+
+        holder.itemView.setOnClickListener{
+            onItemClick.invoke(meal)
+        }
 
     }
 
