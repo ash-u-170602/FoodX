@@ -30,7 +30,6 @@ class CameraBottomSheet : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         binding.camera.setOnClickListener {
 
         }
@@ -67,9 +66,8 @@ class CameraBottomSheet : BottomSheetDialogFragment() {
                     // Releases model resources if no longer used.
                     model.close()
 
-                    probability.forEach {
-                        Log.d("lololol", it.toString())
-                    }
+                    val sortedList = probability.sortedByDescending { it.score }
+                    val top5Items = sortedList.take(5)
 
 
 

@@ -37,10 +37,12 @@
         android:name="com.example.foodx.ui.fragments.CategoryMealsFragment"
         android:label="CategoryMealsFragment" />
     <fragment
+        tools:layout="@layout/cuisine_fragment"
         android:id="@+id/cuisineMealFragment"
         android:name="com.example.foodx.ui.fragments.CuisineMealFragment"
         android:label="CuisineMealFragment" />
     <fragment
+        tools:layout="@layout/search_fragment"
         android:id="@+id/searchFragment"
         android:name="com.example.foodx.ui.fragments.SearchFragment"
         android:label="SearchFragment" />
