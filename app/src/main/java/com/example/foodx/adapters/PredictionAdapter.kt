@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.foodx.databinding.PredictionItemrvBinding
 import org.tensorflow.lite.support.label.Category
 
-class PredictionAdapter : RecyclerView.Adapter<PredictionAdapter.PredictionAdapterViewHolder> {
+class PredictionAdapter : RecyclerView.Adapter<PredictionAdapter.PredictionAdapterViewHolder>() {
 
     inner class PredictionAdapterViewHolder(val binding: PredictionItemrvBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -30,7 +30,10 @@ class PredictionAdapter : RecyclerView.Adapter<PredictionAdapter.PredictionAdapt
 
     override fun onBindViewHolder(holder: PredictionAdapterViewHolder, position: Int) {
         val meal = predictionList[position]
+        holder.binding.serialNumber.text = "${position+1}. "
         holder.binding.meal.text = meal.label.toString()
+
+
         holder.binding.percentage.text = meal.score.toString()
 
     }

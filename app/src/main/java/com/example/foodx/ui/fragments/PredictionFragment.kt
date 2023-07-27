@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodx.adapters.PredictionAdapter
 import com.example.foodx.databinding.PredictionFragmentBinding
 import com.example.foodx.ui.activities.MainActivity
@@ -32,10 +33,16 @@ class PredictionFragment: Fragment() {
 
         prepareRecyclerView()
 
+        predictionAdapter.setPredictionList(viewModel.predictionList)
 
     }
 
     private fun prepareRecyclerView() {
         predictionAdapter = PredictionAdapter()
+        binding.rvPredictions.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = predictionAdapter
+        }
+
     }
 }

@@ -40,7 +40,6 @@ class CategoryMealsFragment : Fragment() {
         loading()
 
 
-
         viewModel.strMeal.observe(viewLifecycleOwner) {
             strCategory = it
             viewModel.getMealsByCategory(strCategory)
@@ -78,7 +77,6 @@ class CategoryMealsFragment : Fragment() {
             intent.putExtra(Constants.Meal_ID, meal.idMeal)
             startActivity(intent)
         }
-
 
     }
 

@@ -9,13 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
+import androidx.navigation.fragment.findNavController
+import com.example.foodx.R
 import com.example.foodx.databinding.CameraBottomSheetBinding
 import com.example.foodx.ml.LiteModelAiyVisionClassifierFoodV11
+import com.example.foodx.ui.activities.MainActivity
+import com.example.foodx.ui.viewModels.HomeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.tensorflow.lite.support.image.TensorImage
 
 class CameraBottomSheet : BottomSheetDialogFragment() {
     private val binding by lazy { CameraBottomSheetBinding.inflate(layoutInflater) }
+
+    private lateinit var viewModel: HomeViewModel
 
 
     override fun onCreateView(
@@ -29,6 +35,7 @@ class CameraBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel = (activity as MainActivity).viewModel
 
         binding.camera.setOnClickListener {
 
@@ -73,6 +80,10 @@ class CameraBottomSheet : BottomSheetDialogFragment() {
                         Log.d("lolol", it.toString())
                     }
 
+                    viewModel.setPredictionList(top5Items)
+
+                    findNavController().navigate(R.id.action_homeFragment_to_predictionFragment)
+                    dismiss()
 
                 } catch (e: java.lang.Exception) {
                     e.printStackTrace()
