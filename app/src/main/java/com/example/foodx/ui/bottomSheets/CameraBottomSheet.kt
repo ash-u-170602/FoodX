@@ -1,7 +1,9 @@
 package com.example.foodx.ui.bottomSheets
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.provider.MediaStore.Images.Media
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +17,8 @@ import com.example.foodx.databinding.CameraBottomSheetBinding
 import com.example.foodx.ml.LiteModelAiyVisionClassifierFoodV11
 import com.example.foodx.ui.activities.MainActivity
 import com.example.foodx.ui.viewModels.HomeViewModel
+import com.example.foodx.util.Constants.Companion.REQUEST_IMAGE_CAPTURE
+import com.example.foodx.util.Constants.Companion.REQUEST_IMAGE_SELECT
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.tensorflow.lite.support.image.TensorImage
 
@@ -38,7 +42,12 @@ class CameraBottomSheet : BottomSheetDialogFragment() {
         viewModel = (activity as MainActivity).viewModel
 
         binding.camera.setOnClickListener {
-
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            if (takePictureIntent.resolveActivity(requireActivity().packageManager) != null) {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            } else {
+                Toast.makeText(requireContext(), "Camera app not found", Toast.LENGTH_SHORT).show()
+            }
         }
 
 
@@ -46,45 +55,31 @@ class CameraBottomSheet : BottomSheetDialogFragment() {
             val intent = Intent()
             intent.action = Intent.ACTION_GET_CONTENT
             intent.type = "image/*"
-            startActivityForResult(intent, 10)
+            startActivityForResult(intent, REQUEST_IMAGE_SELECT)
         }
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 10) {
+        if (requestCode == REQUEST_IMAGE_SELECT) {
             if (data != null) {
                 val uri = data.data
                 try {
+                    startML(uri)
+                } catch (e: java.lang.Exception) {
+                    e.printStackTrace()
+                    Toast.makeText(requireContext(), "Something went wrong!!", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
 
-                    //Getting bitmap of the selected image's uri
-                    val bitmap = Media.getBitmap(requireContext().contentResolver, uri)
+        if (requestCode == REQUEST_IMAGE_CAPTURE) {
+            if (data != null) {
+                var uri = data.data
 
-                    //Open model
-                    val model = LiteModelAiyVisionClassifierFoodV11.newInstance(requireContext())
-
-                    // Creates inputs for reference.
-                    val image = TensorImage.fromBitmap(bitmap)
-
-                    // Runs model inference and gets result.
-                    val outputs = model.process(image)
-                    val probability = outputs.probabilityAsCategoryList
-
-                    // Releases model resources if no longer used.
-                    model.close()
-
-                    val sortedList = probability.sortedByDescending { it.score }
-                    val top5Items = sortedList.take(5)
-
-                    top5Items.forEach {
-                        Log.d("lolol", it.toString())
-                    }
-
-                    viewModel.setPredictionList(top5Items)
-
-                    findNavController().navigate(R.id.action_homeFragment_to_predictionFragment)
-                    dismiss()
-
+                try {
+                    startML(uri)
                 } catch (e: java.lang.Exception) {
                     e.printStackTrace()
                     Toast.makeText(requireContext(), "Something went wrong!!", Toast.LENGTH_SHORT)
@@ -95,6 +90,36 @@ class CameraBottomSheet : BottomSheetDialogFragment() {
 
 
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun startML(uri: Uri?) {
+        //Getting bitmap of the selected image's uri
+        val bitmap = Media.getBitmap(requireContext().contentResolver, uri)
+
+        //Open model
+        val model = LiteModelAiyVisionClassifierFoodV11.newInstance(requireContext())
+
+        // Creates inputs for reference.
+        val image = TensorImage.fromBitmap(bitmap)
+
+        // Runs model inference and gets result.
+        val outputs = model.process(image)
+        val probability = outputs.probabilityAsCategoryList
+
+        // Releases model resources if no longer used.
+        model.close()
+
+        val sortedList = probability.sortedByDescending { it.score }
+        val top5Items = sortedList.take(5)
+
+        top5Items.forEach {
+            Log.d("lolol", it.toString())
+        }
+
+        viewModel.setPredictionList(top5Items)
+
+        findNavController().navigate(R.id.action_homeFragment_to_predictionFragment)
+        dismiss()
     }
 
 }

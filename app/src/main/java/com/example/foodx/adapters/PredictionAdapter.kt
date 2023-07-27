@@ -33,8 +33,9 @@ class PredictionAdapter : RecyclerView.Adapter<PredictionAdapter.PredictionAdapt
         holder.binding.serialNumber.text = "${position+1}. "
         holder.binding.meal.text = meal.label.toString()
 
-
-        holder.binding.percentage.text = meal.score.toString()
+        val score = meal.score*100
+        
+        holder.binding.percentage.text = "${score.toInt()}%"
 
     }
 

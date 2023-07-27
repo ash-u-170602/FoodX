@@ -7,5 +7,7 @@ class Constants {
         const val MEAL_NAME = "com.example.foodx.ui.fragments.mealName"
         const val MEAL_THUMB = "com.example.foodx.ui.fragments.thumbMeal"
         const val Meal_ID = "com.example.foodx.ui.fragments.idMeal"
+        const val REQUEST_IMAGE_CAPTURE = 11
+        const val REQUEST_IMAGE_SELECT = 10
     }
 }
