@@ -31,7 +31,8 @@ class PredictionAdapter : RecyclerView.Adapter<PredictionAdapter.PredictionAdapt
     override fun onBindViewHolder(holder: PredictionAdapterViewHolder, position: Int) {
         val meal = predictionList[position]
         holder.binding.meal.text = meal.label.toString()
-        holder.binding
+        holder.binding.percentage.text = meal.score.toString()
+
     }
 
     override fun getItemCount(): Int {

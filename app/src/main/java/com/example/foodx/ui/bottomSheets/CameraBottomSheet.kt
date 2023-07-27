@@ -80,7 +80,6 @@ class CameraBottomSheet : BottomSheetDialogFragment() {
                         .show()
                 }
             }
-
         }
 
 
