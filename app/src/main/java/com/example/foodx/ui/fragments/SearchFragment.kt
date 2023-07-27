@@ -2,6 +2,7 @@ package com.example.foodx.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -43,6 +44,14 @@ class SearchFragment : Fragment() {
     ): View {
 
         prepareRecyclerView()
+
+        if (viewModel.mealNameForSearch != "") {
+            binding.edSearchBox.setText(viewModel.mealNameForSearch)
+            binding.imgSearch.requestFocus()
+            binding.imgSearch.performClick()
+            viewModel.mealNameForSearch = ""
+        }
+
 
         binding.imgSearch.setOnClickListener { searchMeals() }
         binding.edSearchBox.setOnEditorActionListener { _, actionId, _ ->

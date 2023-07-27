@@ -37,7 +37,7 @@ class PredictionFragment : Fragment() {
 
         predictionAdapter.onItemClick = { meal ->
             val mealName = meal.label
-
+            viewModel.mealNameForSearch = mealName
             findNavController().navigate(R.id.action_predictionFragment_to_searchFragment)
         }
     }
