@@ -69,8 +69,9 @@ class CameraBottomSheet : BottomSheetDialogFragment() {
                     val sortedList = probability.sortedByDescending { it.score }
                     val top5Items = sortedList.take(5)
 
-
-
+                    top5Items.forEach {
+                        Log.d("lolol", it.toString())
+                    }
 
 
                 } catch (e: java.lang.Exception) {

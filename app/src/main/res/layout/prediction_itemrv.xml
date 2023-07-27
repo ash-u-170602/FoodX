@@ -2,7 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/_10sdp"
-    android:layout_margin="@dimen/_5sdp">
+    android:layout_margin="@dimen/_5sdp"
+    android:padding="@dimen/_10sdp">
+
+    <TextView
+        android:id="@+id/serial_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="1."
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/meal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="20"
+        android:text="Test Meal"
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="78%"
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="bold" />
 
 </LinearLayout>
