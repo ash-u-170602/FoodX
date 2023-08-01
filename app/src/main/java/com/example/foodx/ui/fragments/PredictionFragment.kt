@@ -13,7 +13,7 @@ import com.example.foodx.databinding.PredictionFragmentBinding
 import com.example.foodx.ui.activities.MainActivity
 import com.example.foodx.ui.viewModels.HomeViewModel
 
-class PredictionFragment : Fragment() {
+class PredictionFragment : BaseFragment() {
     private val binding by lazy { PredictionFragmentBinding.inflate(layoutInflater) }
 
     private lateinit var viewModel: HomeViewModel
@@ -24,6 +24,7 @@ class PredictionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        navigationVisibility(false)
         return binding.root
     }
 
@@ -49,5 +50,10 @@ class PredictionFragment : Fragment() {
             adapter = predictionAdapter
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        navigationVisibility(false)
     }
 }

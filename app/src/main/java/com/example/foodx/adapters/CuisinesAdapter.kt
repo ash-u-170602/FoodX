@@ -17,7 +17,7 @@ class CuisinesAdapter : RecyclerView.Adapter<CuisinesAdapter.CuisinesAdapterView
 
     fun setCuisineList(cuisineList: List<Cuisine>) {
         this.cuisineList = cuisineList as ArrayList<Cuisine>
-        notifyDataSetChanged()
+        notifyItemRangeChanged(0,itemCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CuisinesAdapterViewHolder {
@@ -70,7 +70,7 @@ class CuisinesAdapter : RecyclerView.Adapter<CuisinesAdapter.CuisinesAdapterView
             "Moroccan" -> "https://assets8.lottiefiles.com/packages/lf20_y3VhypdG2a.json"
             "Polish" -> "https://assets3.lottiefiles.com/packages/lf20_1c2u5agj.json"
             "Portuguese" -> "https://assets4.lottiefiles.com/private_files/lf30_jxtfcl5y.json"
-            "Russian" -> "https://assets1.lottiefiles.com/packages/lf20_Q7LwZnUXBq.json"
+            "Russian" -> "https://lottie.host/c5550c1e-5623-423e-923a-8444d739f806/upynukjktH.json"
             "Spanish" -> "https://assets5.lottiefiles.com/packages/lf20_bSPcHWUL7x.json"
             "Thai" -> "https://assets9.lottiefiles.com/packages/lf20_9ErXHqdUmy.json"
             "Tunisian" -> "https://assets8.lottiefiles.com/packages/lf20_6adGImzoRn.json"

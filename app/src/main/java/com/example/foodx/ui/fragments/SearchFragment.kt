@@ -24,7 +24,7 @@ import com.example.foodx.ui.viewModels.HomeViewModel
 import com.example.foodx.util.Constants
 import com.example.foodx.util.Resource
 
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment() {
     private val binding by lazy { SearchFragmentBinding.inflate(layoutInflater) }
 
     private lateinit var viewModel: HomeViewModel
@@ -33,7 +33,7 @@ class SearchFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        navigationVisibility(false)
         viewModel = (activity as MainActivity).viewModel
     }
 
@@ -117,11 +117,6 @@ class SearchFragment : Fragment() {
         binding.progressBar.visibility = View.GONE
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
     private fun searchMeals() {
         loading()
         val searchQuery = binding.edSearchBox.text.toString().trim()
@@ -141,5 +136,10 @@ class SearchFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
             adapter = searchRecyclerViewAdapter
         }
+    }
+
+    override fun onResume() {
+        navigationVisibility(false)
+        super.onResume()
     }
 }

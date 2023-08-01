@@ -16,7 +16,7 @@ import com.example.foodx.ui.viewModels.HomeViewModel
 import com.example.foodx.util.Constants
 import com.example.foodx.util.Resource
 
-class CuisineMealFragment : Fragment() {
+class CuisineMealFragment : BaseFragment() {
     private val binding by lazy { CategoryMealFragmentBinding.inflate(layoutInflater) }
 
     private lateinit var viewModel: HomeViewModel
@@ -29,13 +29,13 @@ class CuisineMealFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        navigationVisibility(false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
-
 
         prepareRecyclerView()
         loading()

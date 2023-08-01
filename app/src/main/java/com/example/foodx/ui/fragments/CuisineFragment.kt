@@ -15,7 +15,7 @@ import com.example.foodx.ui.activities.MainActivity
 import com.example.foodx.ui.viewModels.HomeViewModel
 import com.example.foodx.util.Resource
 
-class CuisineFragment : Fragment() {
+class CuisineFragment : BaseFragment() {
     private val binding by lazy { CuisineFragmentBinding.inflate(layoutInflater) }
 
     private lateinit var viewModel: HomeViewModel
@@ -23,6 +23,7 @@ class CuisineFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        navigationVisibility(true)
         viewModel = (activity as MainActivity).viewModel
     }
 
@@ -47,6 +48,7 @@ class CuisineFragment : Fragment() {
                         cuisinesAdapter.setCuisineList(listOfCuisines)
                     }
                 }
+
 
                 is Resource.Error -> {
 //                    hideProgressBar()
@@ -76,6 +78,16 @@ class CuisineFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
             adapter = cuisinesAdapter
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        navigationVisibility(false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        navigationVisibility(true)
     }
 
 }

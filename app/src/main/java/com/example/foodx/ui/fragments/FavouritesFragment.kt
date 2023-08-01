@@ -18,7 +18,7 @@ import com.example.foodx.ui.viewModels.HomeViewModel
 import com.example.foodx.util.Constants
 import com.google.android.material.snackbar.Snackbar
 
-class FavouritesFragment : Fragment(R.layout.favourites_fragment) {
+class FavouritesFragment : BaseFragment() {
     private val binding by lazy { FavouritesFragmentBinding.inflate(layoutInflater) }
 
     private lateinit var viewModel: HomeViewModel
@@ -26,6 +26,7 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        navigationVisibility(true)
         viewModel = (activity as MainActivity).viewModel
     }
 
@@ -90,5 +91,15 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment) {
             adapter = mealAdapter
         }
 
+    }
+
+    override fun onDestroy() {
+        navigationVisibility(false)
+        super.onDestroy()
+    }
+
+    override fun onResume() {
+        navigationVisibility(true)
+        super.onResume()
     }
 }

@@ -28,7 +28,7 @@ import com.example.foodx.util.Constants.Companion.MEAL_THUMB
 import com.example.foodx.util.Constants.Companion.Meal_ID
 import com.example.foodx.util.Resource
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
     private val binding by lazy { HomeFragmentBinding.inflate(layoutInflater) }
 
     private lateinit var viewModel: HomeViewModel
@@ -39,11 +39,13 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        navigationVisibility(true)
         viewModel.getRandomMeal()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        navigationVisibility(true)
         binding.lottieAnimationLoading.setAnimationFromUrl("https://assets2.lottiefiles.com/packages/lf20_d2yblndy.json")
     }
 
@@ -205,4 +207,8 @@ class HomeFragment : Fragment() {
 
     }
 
+    override fun onDestroy() {
+        navigationVisibility(false)
+        super.onDestroy()
+    }
 }

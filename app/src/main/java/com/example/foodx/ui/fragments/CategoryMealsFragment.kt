@@ -16,7 +16,7 @@ import com.example.foodx.ui.viewModels.HomeViewModel
 import com.example.foodx.util.Constants
 import com.example.foodx.util.Resource
 
-class CategoryMealsFragment : Fragment() {
+class CategoryMealsFragment : BaseFragment() {
     private val binding by lazy { CategoryMealFragmentBinding.inflate(layoutInflater) }
 
     private lateinit var viewModel: HomeViewModel
@@ -29,6 +29,7 @@ class CategoryMealsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        navigationVisibility(false)
         return binding.root
     }
 
@@ -38,7 +39,6 @@ class CategoryMealsFragment : Fragment() {
 
         prepareRecyclerView()
         loading()
-
 
         viewModel.strMeal.observe(viewLifecycleOwner) {
             strCategory = it
