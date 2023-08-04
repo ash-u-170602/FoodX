@@ -47,6 +47,7 @@ class HomeFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         navigationVisibility(true)
         binding.lottieAnimationLoading.setAnimationFromUrl("https://assets2.lottiefiles.com/packages/lf20_d2yblndy.json")
+        (activity as MainActivity).setTheme(R.style.Theme_FoodX)
     }
 
     override fun onCreateView(

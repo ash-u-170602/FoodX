@@ -22,7 +22,7 @@
             android:layout_height="@dimen/_45sdp"
             android:layout_weight="1"
             android:background="@drawable/search_box_background"
-            android:hint="Search Meals..."
+            android:hint="Search Foods..."
             android:paddingStart="15dp"
             android:imeOptions="actionSearch"
             android:inputType="text"
