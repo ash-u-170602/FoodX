@@ -33,6 +33,7 @@ class MealActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_FoodX)
         setContentView(binding.root)
 
         val foodRepository = FoodRepository(MealDatabase(this))
