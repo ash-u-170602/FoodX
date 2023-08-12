@@ -71,7 +71,7 @@
 
 ### Built With
 
-- [Jetpack Compose](https://developer.android.com/jetpack/compose)
+- [Tensor Flow](https://www.tensorflow.org)
 
 
     Written in Kotlin ♥
@@ -91,10 +91,10 @@ Install [Android Studio](https://developer.android.com/studio)
 2. Clone the forked repo
 
    ```sh
-   git clone https://github.com/{your-github-username}/EmoEase
+   git clone https://github.com/{your-github-username}/FoodX
    ```
 
-   example : `git clone https://github.com/tahir19-fm/EmoEase`
+   example : `git clone https://github.com/ash-u-170602/EmoEase`
 
 3. Download an emulator or connect a real device
    
@@ -103,11 +103,10 @@ Install [Android Studio](https://developer.android.com/studio)
 ### Future Goals
 
 - [ ] Feature to add and connect with doctors and get appoinments.
-- [ ] Enhancing the login page
-- [ ] Add feature to reminder screen.
+- [ ] Add the login page
+- [ ] Add feature to order food.
 - [ ] Add chat feature for users.
-- [ ] Add option to upload photo and video while mood recording.
-- [ ] Improve exercise features and add timings and musics during exercise.
+- [ ] Add feature to show nutrients of food.
 - [ ] Improve Account section and add multiple languages.
 - [ ] Write Unit Test
 
@@ -125,4 +124,4 @@ Refer to this [article](https://medium.com/geekculture/a-quick-guide-to-create-a
    
 # Contact
 
-Tahir Majid - tahir19.fm@gmail.com , [Linkedin](https://www.linkedin.com/in/tahir-majid-213a2222a/)
+Ashad Naushad - mohda170602@gmail.com , [Linkedin](https://www.linkedin.com/in/ashadnaushad/)
