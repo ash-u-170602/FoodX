@@ -2,19 +2,13 @@ package com.example.foodx.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.foodx.R
 import com.example.foodx.adapters.MealAdapter
 import com.example.foodx.databinding.SearchFragmentBinding
 import com.example.foodx.models.CategoryMeals
@@ -53,7 +47,11 @@ class SearchFragment : BaseFragment() {
         }
 
 
-        binding.imgSearch.setOnClickListener { searchMeals() }
+        binding.imgSearch.setOnClickListener {
+            searchMeals()
+        }
+
+
         binding.edSearchBox.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 searchMeals()
