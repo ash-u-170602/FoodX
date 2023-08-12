@@ -46,7 +46,6 @@ class SearchFragment : BaseFragment() {
             viewModel.mealNameForSearch = ""
         }
 
-
         binding.imgSearch.setOnClickListener { searchMeals() }
 
         binding.edSearchBox.setOnEditorActionListener { _, actionId, _ ->

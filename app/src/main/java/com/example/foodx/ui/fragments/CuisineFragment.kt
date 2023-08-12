@@ -48,7 +48,6 @@ class CuisineFragment : BaseFragment() {
                     }
                 }
 
-
                 is Resource.Error -> {
 //                    hideProgressBar()
                     response.message?.let { message ->
