@@ -47,10 +47,7 @@ class SearchFragment : BaseFragment() {
         }
 
 
-        binding.imgSearch.setOnClickListener {
-            searchMeals()
-        }
-
+        binding.imgSearch.setOnClickListener { searchMeals() }
 
         binding.edSearchBox.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
