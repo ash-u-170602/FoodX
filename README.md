@@ -62,9 +62,9 @@
 
 
 
-|                                                                           Recipe Screen                                                                     |                                                      Prediction Screen                                             |                         
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------: | 
-|         <img src="https://github.com/ash-u-170602/FoodX/blob/00becf8d063244087aed79ddcc95a5bb4d0fad7a/images/recipe.jpg" height="600" width="300"/>    |      <img src="https://github.com/ash-u-170602/FoodX/blob/00becf8d063244087aed79ddcc95a5bb4d0fad7a/images/prediction.jpg" height="600" width="300"/>|  
+|                                                                           Recipe Screen                                                                     |                                                      Prediction Screen                                             |                                        Search Screen                                                      |                            
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: |
+|         <img src="https://github.com/ash-u-170602/FoodX/blob/0ee34dffc1288fa7ae2b2dbf32acd1f3aa1e3013/images/recipe.jpg" height="600" width="300"/>    |      <img src="https://github.com/ash-u-170602/FoodX/blob/0ee34dffc1288fa7ae2b2dbf32acd1f3aa1e3013/images/prediction.jpg" height="600" width="300"/>|        <img src="https://github.com/ash-u-170602/FoodX/blob/0ee34dffc1288fa7ae2b2dbf32acd1f3aa1e3013/images/search.jpg" height="600" width="300"/>| 
 
 
 ---
