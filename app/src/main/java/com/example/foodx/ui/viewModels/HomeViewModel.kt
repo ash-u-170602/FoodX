@@ -303,7 +303,7 @@ class HomeViewModel(
         }
         return Resource.Error(response.message())
     }
-
+    
     private fun handleRandomMealResponse(response: Response<MealResponse>): Resource<MealResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->

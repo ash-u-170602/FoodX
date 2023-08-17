@@ -6,24 +6,24 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
-        tools:layout="@layout/favourites_fragment"
         android:id="@+id/favouritesFragment"
         android:name="com.example.foodx.ui.fragments.FavouritesFragment"
-        android:label="FavouritesFragment" />
+        android:label="FavouritesFragment"
+        tools:layout="@layout/favourites_fragment" />
     <fragment
-        tools:layout="@layout/cuisine_fragment"
         android:id="@+id/categoriesFragment"
         android:name="com.example.foodx.ui.fragments.CuisineFragment"
-        android:label="CategoriesFragment" >
+        android:label="CategoriesFragment"
+        tools:layout="@layout/cuisine_fragment">
         <action
             android:id="@+id/action_categoriesFragment_to_cuisineMealFragment"
             app:destination="@id/cuisineMealFragment" />
     </fragment>
     <fragment
-        tools:layout="@layout/home_fragment"
         android:id="@+id/homeFragment"
         android:name="com.example.foodx.ui.fragments.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment"
+        tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_categoryMealsFragment"
             app:destination="@id/categoryMealsFragment" />
@@ -35,25 +35,25 @@
             app:destination="@id/predictionFragment" />
     </fragment>
     <fragment
-        tools:layout="@layout/category_meal_fragment"
         android:id="@+id/categoryMealsFragment"
         android:name="com.example.foodx.ui.fragments.CategoryMealsFragment"
-        android:label="CategoryMealsFragment" />
+        android:label="CategoryMealsFragment"
+        tools:layout="@layout/category_meal_fragment" />
     <fragment
-        tools:layout="@layout/cuisine_fragment"
         android:id="@+id/cuisineMealFragment"
         android:name="com.example.foodx.ui.fragments.CuisineMealFragment"
-        android:label="CuisineMealFragment" />
+        android:label="CuisineMealFragment"
+        tools:layout="@layout/cuisine_fragment" />
     <fragment
-        tools:layout="@layout/search_fragment"
         android:id="@+id/searchFragment"
         android:name="com.example.foodx.ui.fragments.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment"
+        tools:layout="@layout/search_fragment" />
     <fragment
-        tools:layout="@layout/prediction_fragment"
         android:id="@+id/predictionFragment"
         android:name="com.example.foodx.ui.fragments.PredictionFragment"
-        android:label="PredictionFragment" >
+        android:label="PredictionFragment"
+        tools:layout="@layout/prediction_fragment">
         <action
             android:id="@+id/action_predictionFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
