@@ -100,6 +100,8 @@ Install [Android Studio](https://developer.android.com/studio)
    
 4. Build the project using build and run
 
+5. Or install the apk and run directly in your android device by this link [Click here](https://drive.google.com/file/d/19HgjUQubBJTZWX3uWXJ5cNL0VvLqoXw0/view?usp=sharing)
+
 ### Future Goals
 
 - [ ] Feature to add and connect with doctors and get appoinments.
